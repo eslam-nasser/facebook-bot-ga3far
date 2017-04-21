@@ -174,6 +174,13 @@ function sendGenericMessage(sender) {
 	})
 }
 
+
+// get random image size
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 // spin spin sugar
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
