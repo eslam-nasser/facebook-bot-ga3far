@@ -63,30 +63,30 @@ app.post('/webhook/', function (req, res) {
 				console.log("welcome to chatbot")
 				sendGenericMessage(sender)
 				continue
-			}else if(
-				text === 'ابعت صورة' ||
-				text === 'هات صورة' ||
-				text === 'صورة' ||
+			}
+			// else if(
+			// 	text === 'ابعت صورة' ||
+			// 	text === 'هات صورة' ||
+			// 	text === 'صورة' ||
 
-				text === 'ابعت صوره' ||
-				text === 'هات صوره' ||
-				text === 'صوره' ||
+			// 	text === 'ابعت صوره' ||
+			// 	text === 'هات صوره' ||
+			// 	text === 'صوره' ||
 
-				text === 'خلفية' ||
-				text === 'خلفيه'
-			){
-				messageData = {
-					attachment:{
-						type: 'image',
-						payload:{
-						url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
-						}
-					}
-				}
-				continue
-			}else if(
-				text === 'أشتم'
-			){
+			// 	text === 'خلفية' ||
+			// 	text === 'خلفيه'
+			// ){
+			// 	messageData = {
+			// 		attachment:{
+			// 			type: 'image',
+			// 			payload:{
+			// 			url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
+			// 			}
+			// 		}
+			// 	}
+			// 	continue
+			// }
+			if(text === 'أشتم'){
 				messageData = {text: bad_words[Math.floor(Math.random()*bad_words.length)]};
 				continue
 			}
