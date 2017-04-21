@@ -63,16 +63,16 @@ app.post('/webhook/', function (req, res) {
 				sendGenericMessage(sender)
 				continue
 			}else if(
-				txt === 'ابعت صورة' ||
-				txt === 'هات صورة' ||
-				txt === 'صورة' ||
+				text === 'ابعت صورة' ||
+				text === 'هات صورة' ||
+				text === 'صورة' ||
 
-				txt === 'ابعت صوره' ||
-				txt === 'هات صوره' ||
-				txt === 'صوره' ||
+				text === 'ابعت صوره' ||
+				text === 'هات صوره' ||
+				text === 'صوره' ||
 
-				txt === 'خلفية' ||
-				txt === 'خلفيه'
+				text === 'خلفية' ||
+				text === 'خلفيه'
 			){
 				messageData = {
 					attachment:{
