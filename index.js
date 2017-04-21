@@ -59,37 +59,43 @@ app.post('/webhook/', function (req, res) {
 		if (event.message && event.message.text) {
 			let text = event.message.text;
 			let messageData;
+			// send cards
 			if (text === 'Generic'){
 				console.log("welcome to chatbot")
 				sendGenericMessage(sender)
 				continue
 			}
-			// else if(
-			// 	text === 'ابعت صورة' ||
-			// 	text === 'هات صورة' ||
-			// 	text === 'صورة' ||
+			// send images
+			if(
+				text === 'ابعت صورة' ||
+				text === 'هات صورة' ||
+				text === 'صورة' ||
 
-			// 	text === 'ابعت صوره' ||
-			// 	text === 'هات صوره' ||
-			// 	text === 'صوره' ||
+				text === 'ابعت صوره' ||
+				text === 'هات صوره' ||
+				text === 'صوره' ||
 
-			// 	text === 'خلفية' ||
-			// 	text === 'خلفيه'
-			// ){
-			// 	messageData = {
-			// 		attachment:{
-			// 			type: 'image',
-			// 			payload:{
-			// 			url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
-			// 			}
-			// 		}
-			// 	}
-			// 	continue
-			// }
-			if(text === 'أشتم'){
-				messageData = {text: bad_words[Math.floor(Math.random()*bad_words.length)]};
+				text === 'خلفية' ||
+				text === 'خلفيه'
+			){
+				messageData = {
+					attachment:{
+						type: 'image',
+						payload:{
+						url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
+						}
+					}
+				}
+				sendTextMessage(sender, messageData)
 				continue
 			}
+			// swearing
+			if(text === 'اشتم'){
+				messageData = {text: bad_words[Math.floor(Math.random()*bad_words.length)]};
+				sendTextMessage(sender, messageData)
+				continue
+			}
+			// if i don't understand
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
@@ -107,7 +113,7 @@ app.post('/webhook/', function (req, res) {
 const token = "EAABdDLxPwfABAGPihFaggBZCeri5ZC6u3u0k5dZAtKMyQ2uI5UxpxU2M0JDva6jTIvmEsF0VWsfsKNFnQe00VDre1JZA1gznXwpnLOqwCg52VpJbdBpqQBFZBvEotcTQXvu6dCsT13hoZCsqupa1aZC71btNbLy7xCOHUSiCFG7oQZDZD"
 
 function sendTextMessage(sender, text) {
-	let messageData = { text:text }
+	let messageData = { text: text }
 	
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
