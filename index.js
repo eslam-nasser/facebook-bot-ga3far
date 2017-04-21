@@ -86,13 +86,12 @@ app.post('/webhook/', function (req, res) {
 						}
 					}
 				}
-				sendTextMessage(sender, messageData)
+				sendImage(sender, messageData)
 				continue
 			}
 			// swearing
 			if(text === 'اشتم'){
-				messageData = {text: bad_words[Math.floor(Math.random()*bad_words.length)]};
-				sendTextMessage(sender, messageData)
+				sendTextMessage(sender, bad_words[Math.floor(Math.random()*bad_words.length)])
 				continue
 			}
 			// if i don't understand
@@ -114,6 +113,26 @@ const token = "EAABdDLxPwfABAGPihFaggBZCeri5ZC6u3u0k5dZAtKMyQ2uI5UxpxU2M0JDva6jT
 
 function sendTextMessage(sender, text) {
 	let messageData = { text: text }
+	
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function sendImage(sender, obj) {
+	let messageData = obj;
 	
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
