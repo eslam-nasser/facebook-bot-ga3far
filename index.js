@@ -14,6 +14,19 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+const bad_words = 
+[
+	'يا ابن الوسخة!',
+	'يا إبن الجزمة!',
+	'يا ابن العرص',
+	'طيب ليه كدا!',
+	'هزعلك و أجيب ناس تزعلك',
+	'يا إبن الكلب يا جزمة',
+	'عارفك و هجيبك ياض!',
+	'هزعلك!',
+	'يا قليل الإدب!',
+	'يا اخي كسمك!'
+]
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -45,9 +58,35 @@ app.post('/webhook/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			if (text === 'Generic'){ 
+			if (text === 'Generic'){
 				console.log("welcome to chatbot")
 				sendGenericMessage(sender)
+				continue
+			}else if(
+				txt === 'ابعت صورة' ||
+				txt === 'هات صورة' ||
+				txt === 'صورة' ||
+
+				txt === 'ابعت صوره' ||
+				txt === 'هات صوره' ||
+				txt === 'صوره' ||
+
+				txt === 'خلفية' ||
+				txt === 'خلفيه'
+			){
+				messageData = {
+					attachment:{
+						type: 'image',
+						payload:{
+						url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
+						}
+					}
+				}
+				continue
+			}else if(
+				text === 'أشتم'
+			){
+				messageData = {text: bad_words[Math.floor(Math.random()*bad_words.length)]};
 				continue
 			}
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
