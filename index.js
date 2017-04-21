@@ -6,7 +6,7 @@ const app = express()
 const bad_words = 
 [
 	'يا ابن الوسخة',
-	'يا إبن الجزمة',
+	'يا ابن الجزمة',
 	'يا ابن العرص',
 	'طيب ليه كدا',
 	'هزعلك و أجيب ناس تزعلك',
@@ -83,11 +83,11 @@ app.post('/webhook/', function (req, res) {
 			// if i don't understand
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
-		if (event.postback) {
-			let text = JSON.stringify(event.postback)
-			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-			continue
-		}
+		// if (event.postback) {
+		// 	let text = JSON.stringify(event.postback)
+		// 	sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+		// 	continue
+		// }
 	}
 	res.sendStatus(200)
 })
