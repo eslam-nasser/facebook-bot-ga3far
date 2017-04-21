@@ -1,42 +1,25 @@
-//This is still work in progress
-/*
-Please report any bugs to nicomwaks@gmail.com
-
-i have added console.log on line 48 
-
-
-
-
- */
 'use strict'
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 const bad_words = 
 [
-	'يا ابن الوسخة!',
-	'يا إبن الجزمة!',
+	'يا ابن الوسخة',
+	'يا إبن الجزمة',
 	'يا ابن العرص',
-	'طيب ليه كدا!',
+	'طيب ليه كدا',
 	'هزعلك و أجيب ناس تزعلك',
 	'يا إبن الكلب يا جزمة',
-	'عارفك و هجيبك ياض!',
-	'هزعلك!',
-	'يا قليل الإدب!',
-	'يا اخي كسمك!'
+	'عارفك و هجيبك ياض',
+	'هزعلك',
+	'يا قليل الإدب',
+	'يا اخي كسمك'
 ]
 
 app.set('port', (process.env.PORT || 5000))
-
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
-
-// parse application/json
 app.use(bodyParser.json())
-
-// index
 app.get('/', function (req, res) {
 	res.send('hello world i am a secret bot')
 })
@@ -90,7 +73,10 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			// swearing
-			if(text === 'اشتم'){
+			if(
+				text === 'اشتم' ||
+			 	bad_words.includes(text)
+			){
 				sendTextMessage(sender, bad_words[Math.floor(Math.random()*bad_words.length)])
 				continue
 			}
