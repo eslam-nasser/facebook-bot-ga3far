@@ -99,7 +99,7 @@ const token = "EAABdDLxPwfABAGPihFaggBZCeri5ZC6u3u0k5dZAtKMyQ2uI5UxpxU2M0JDva6jT
 
 function sendTextMessage(sender, text) {
 	let messageData = { text: text }
-	
+	console.log(`Sending ${text} to ${sender}`)
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
