@@ -114,7 +114,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('عامل') ||
 			 	text.includes('أخبرك')
 			){
-				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.salam))
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
 			}
 			// if i don't understand
@@ -225,7 +225,7 @@ function sendGenericMessage(sender) {
 // Stay up bitch!
 setInterval(function() {
     request.get('http://pacific-bayou-22883.herokuapp.com/');
-}, 1200); // each 20 min bing him
+}, 1500); // each 20 min bing him
 
 // spin spin sugar
 app.listen(app.get('port'), function() {
