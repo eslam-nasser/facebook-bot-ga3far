@@ -71,6 +71,7 @@ app.post('/webhook/', function (req, res) {
 				if(howManyImages === 2){
 					theWord = 'صورتين'
 				}
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, `هبعتلك ${theWord} اهو ..`)
 				for (let i = 0; i < howManyImages; i++) {
 					helpers.sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
@@ -84,6 +85,7 @@ app.post('/webhook/', function (req, res) {
 				text.includes('شتائم') ||
 			 	helpers.arrayContains(text, dictionary.hard_bad_words)
 			){
+				helpers.typing(sender)				
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.soft_bad_words))
 				continue
 			}
@@ -94,6 +96,7 @@ app.post('/webhook/', function (req, res) {
 				text === 'صباح جميل' ||
 			 	text.includes('صباح')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.morning))
 				setTimeout(() => {
 					helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
@@ -107,6 +110,7 @@ app.post('/webhook/', function (req, res) {
 				text === 'مساء جميل' ||
 			 	text.includes('مسا')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.evening))
 				setTimeout(() => {
 					helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
@@ -119,6 +123,7 @@ app.post('/webhook/', function (req, res) {
 				text === 'سلام عليكم' ||
 			 	text.includes('سلام')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.salam))
 				setTimeout(() => {
 					helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
@@ -129,6 +134,7 @@ app.post('/webhook/', function (req, res) {
 			if(
 			 	text.includes('صاحي')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imUp))
 				continue
 			}
@@ -136,6 +142,7 @@ app.post('/webhook/', function (req, res) {
 			if(
 			 	text.includes('جنيه')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.one_pound))
 				continue
 			}
@@ -149,6 +156,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('اخبارك') ||
 			 	text.includes('عامل')
 			){
+				helpers.typing(sender)
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imGood))
 				setTimeout(() => {
 					helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
