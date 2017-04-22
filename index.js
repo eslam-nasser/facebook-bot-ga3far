@@ -167,7 +167,7 @@ app.post('/webhook/', function (req, res) {
 			if(
 				text === 'typing'
 			){
-				typing(sender);
+				helpers.typing(sender);
 				setTimeout(() => {
 					helpers.sendTextMessage(sender, 'هكتب رساله ...')
 				})
