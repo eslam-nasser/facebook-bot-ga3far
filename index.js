@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-import * as dictionary from './words_dictionary'
+const dictionary = require('./words_dictionary')
 
 console.log(dictionary)
 
