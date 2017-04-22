@@ -69,9 +69,9 @@ app.post('/webhook/', function (req, res) {
 			// swearing
 			if(
 				text === 'اشتم' ||
-			 	bad_words.includes(text)
+			 	dictionary.bad_words.includes(text)
 			){
-				sendTextMessage(sender, bad_words[Math.floor(Math.random()*bad_words.length)])
+				sendTextMessage(sender, dictionary.bad_words[Math.floor(Math.random()*dictionary.bad_words.length)])
 				continue
 			}
 			// morning
