@@ -37,12 +37,6 @@ app.post('/webhook/', function (req, res) {
 		if (event.message && event.message.text) {
 			let text = event.message.text;
 			let messageData;
-			// send cards
-			// if (text === 'Generic'){
-			// 	console.log("welcome to chatbot")
-			// 	sendGenericMessage(sender)
-			// 	continue
-			// }
 			// send single image
 			if(
 				text === 'ابعت صورة' ||
@@ -61,9 +55,7 @@ app.post('/webhook/', function (req, res) {
 				text.includes('خلفي')
 			){
 				helpers.typing(sender)
-				setTimeout(()=> {
-					helpers.sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
-				}, 500)
+				helpers.sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
 				continue
 			}
 			// get few images
