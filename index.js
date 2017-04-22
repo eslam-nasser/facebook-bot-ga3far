@@ -59,7 +59,7 @@ app.post('/webhook/', function (req, res) {
 					attachment:{
 						type: 'image',
 						payload:{
-						url: `https://unsplash.it/${getRandomInt(100, 1000)}/${getRandomInt(100, 1000)}/?random`
+						url: `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`
 						}
 					}
 				}
@@ -82,6 +82,38 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('صباح')
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.morning))
+				continue
+			}
+			// evening
+			if(
+				text === 'مساء الفل' ||
+				text === 'مساء الخير' ||
+				text === 'مساء جميل' ||
+			 	text.includes('مسا')
+			){
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.evening))
+				continue
+			}
+			// Salam
+			if(
+				text === 'السلام عليكم' ||
+				text === 'سلام عليكم' ||
+			 	text.includes('سلام')
+			){
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.salam))
+				continue
+			}
+			// How you doing!
+			if(
+				text === 'أخبارك ايه' ||
+				text === 'اخبارك ايه' ||
+				text === 'عامل ايه' ||
+				text === 'ايه الدنيا' ||
+			 	text.includes('اخبارك') ||
+			 	text.includes('عامل') ||
+			 	text.includes('أخبرك')
+			){
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.salam))
 				continue
 			}
 			// if i don't understand
@@ -189,11 +221,10 @@ function sendGenericMessage(sender) {
 }
 
 
-// get random image size
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
+// Stay up bitch!
+setInterval(function() {
+    http.get('https://pacific-bayou-22883.herokuapp.com/');
+}, 1200); // each 20 min bing him
 
 // spin spin sugar
 app.listen(app.get('port'), function() {
