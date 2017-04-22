@@ -70,7 +70,8 @@ app.post('/webhook/', function (req, res) {
 			// swearing
 			if(
 				text === 'اشتم' ||
-			 	dictionary.bad_words.includes(text)
+			 	dictionary.bad_words.includes(text) ||
+			 	helpers.arrayContains(text, dictionary.bad_words)
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.bad_words))
 				continue
