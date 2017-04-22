@@ -67,7 +67,13 @@ app.post('/webhook/', function (req, res) {
 				text === 'خلفيات' ||
 				text.includes('صور')
 			){
-				for (let i = 0; i < helpers.getRandomInt(2, 5); i++) {
+				let howManyImages = helpers.getRandomInt(2, 5);
+				let theWord = `${howManyImages} صور`;
+				if(howManyImages === 2){
+					theWord = 'صورتين'
+				}
+				sendTextMessage(sender, `هبعتلك ${theWord} اهو ..`)
+				for (let i = 0; i < howManyImages; i++) {
 					sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
 				}
 				continue
