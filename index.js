@@ -160,7 +160,7 @@ function sendTextMessage(sender, text) {
 		if (error) {
 			console.log('Error sending messages: ', error)
 		} else if (response.body.error) {
-			cosnole.log('response.body ==>', response.body)
+			console.log('response.body ==>', response.body)
 			console.log('Error: ', response.body.error)
 		}
 	})
