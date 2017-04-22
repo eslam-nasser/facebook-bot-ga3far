@@ -84,11 +84,12 @@ app.post('/webhook/', function (req, res) {
 			}
 			// swearing
 			if(
-				text === 'اشتم' ||
-			 	dictionary.bad_words.includes(text) ||
-			 	helpers.arrayContains(text, dictionary.bad_words)
+				text.includes('شتم') ||
+				text.includes('شتايم') ||
+				text.includes('شتائم') ||
+			 	helpers.arrayContains(text, dictionary.hard_bad_words)
 			){
-				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.bad_words))
+				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.soft_bad_words))
 				continue
 			}
 			// morning
