@@ -95,6 +95,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('صباح')
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.morning))
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
 			}
 			// evening
@@ -105,6 +106,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('مسا')
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.evening))
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
 			}
 			// Salam
@@ -114,6 +116,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('سلام')
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.salam))
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
 			}
 			// How you doing!
