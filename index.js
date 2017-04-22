@@ -60,7 +60,10 @@ app.post('/webhook/', function (req, res) {
 				text.includes('صوره') ||
 				text.includes('خلفي')
 			){
-				helpers.sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
+				helpers.typing()
+				setTimeout(()=> {
+					helpers.sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
+				}, 500)
 				continue
 			}
 			// get few images
