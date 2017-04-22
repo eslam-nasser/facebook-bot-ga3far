@@ -39,7 +39,7 @@ app.post('/webhook/', function (req, res) {
 				sendGenericMessage(sender)
 				continue
 			}
-			// send images
+			// send single image
 			if(
 				text === 'ابعت صورة' ||
 				text === 'هات صورة' ||
@@ -56,15 +56,20 @@ app.post('/webhook/', function (req, res) {
 				text.includes('صوره') ||
 				text.includes('خلفي')
 			){
-				messageData = {
-					attachment:{
-						type: 'image',
-						payload:{
-						url: `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`
-						}
-					}
+				sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
+				continue
+			}
+			// get few images
+			if(
+				text === 'ابعت صور' ||
+				text === 'هات صور' ||
+				text === 'صور' ||
+				text === 'خلفيات' ||
+				text.includes('صور')
+			){
+				for (var i = 0; i < helpers.getRandomInt(2, 5); i++) {
+					sendImage(sender, `https://unsplash.it/${helpers.getRandomInt(100, 1000)}/${helpers.getRandomInt(100, 1000)}/?random`)
 				}
-				sendImage(sender, messageData)
 				continue
 			}
 			// swearing
@@ -153,9 +158,15 @@ function sendTextMessage(sender, text) {
 	})
 }
 
-function sendImage(sender, obj) {
-	let messageData = obj;
-	
+function sendImage(sender, imgUrl) {
+	let messageData = {
+		attachment:{
+			type: 'image',
+			payload:{
+				url: imgUrl
+			}
+		}
+	};
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
