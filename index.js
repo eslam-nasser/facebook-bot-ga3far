@@ -29,7 +29,7 @@ app.post('/webhook/', function (req, res) {
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i]
-		let sender = event.sender.id
+		let sender = event.sender.id;
 		if (event.message && event.message.text) {
 			let text = event.message.text;
 			let messageData;
@@ -145,11 +145,8 @@ app.post('/webhook/', function (req, res) {
 			if(
 				text === 'typing'
 			){
-				typing();
-				// sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imGood))
-				// setTimeout(() => {
-				// 	sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
-				// }, 500)
+				sendTextMessage(sender, 'هكتب رساله ...')
+				typing(sender);
 				continue
 			}
 			// if i don't understand
@@ -188,13 +185,13 @@ function sendTextMessage(sender, text) {
 	})
 }
 
-function typing(){
+function typing(sender){
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
-			recipient: {id:sender},
+			recipient: {id: sender},
 			sender_action: 'typing_on'
 		}
 	}, function(error, response, body) {
