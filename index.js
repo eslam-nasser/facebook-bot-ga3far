@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 const dictionary = require('./words_dictionary')
+const helpers = require('./helpers')
 
-console.log(dictionary)
 
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -71,7 +71,7 @@ app.post('/webhook/', function (req, res) {
 				text === 'اشتم' ||
 			 	dictionary.bad_words.includes(text)
 			){
-				sendTextMessage(sender, dictionary.bad_words[Math.floor(Math.random()*dictionary.bad_words.length)])
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.bad_words))
 				continue
 			}
 			// morning
@@ -81,7 +81,7 @@ app.post('/webhook/', function (req, res) {
 				text === 'صباح جميل' ||
 			 	text.includes('صباح')
 			){
-				sendTextMessage(sender, 'صباحك عسل :D')
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.morning))
 				continue
 			}
 			// if i don't understand
