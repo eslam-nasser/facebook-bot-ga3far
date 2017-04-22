@@ -137,6 +137,13 @@ app.post('/webhook/', function (req, res) {
 				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imUp))
 				continue
 			}
+			// give me some money
+			if(
+			 	text.includes('جنيه')
+			){
+				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.one_pound))
+				continue
+			}
 			// How you doing!
 			if(
 				text === 'أخبارك ايه' ||
