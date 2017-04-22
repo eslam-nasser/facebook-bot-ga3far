@@ -141,6 +141,17 @@ app.post('/webhook/', function (req, res) {
 				}, 500)
 				continue
 			}
+			// typing
+			if(
+				text === 'typing'
+			){
+				typing();
+				// sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imGood))
+				// setTimeout(() => {
+				// 	sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
+				// }, 500)
+				continue
+			}
 			// if i don't understand
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
@@ -173,6 +184,24 @@ function sendTextMessage(sender, text) {
 		} else if (response.body.error) {
 			console.log('response.body ==>', response.body)
 			// console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function typing(){
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			sender_action: 'typing_on'
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
 		}
 	})
 }
