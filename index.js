@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const JSONbig = require('json-bigint')
 const app = express();
 const token = "EAABdDLxPwfABAGPihFaggBZCeri5ZC6u3u0k5dZAtKMyQ2uI5UxpxU2M0JDva6jTIvmEsF0VWsfsKNFnQe00VDre1JZA1gznXwpnLOqwCg52VpJbdBpqQBFZBvEotcTQXvu6dCsT13hoZCsqupa1aZC71btNbLy7xCOHUSiCFG7oQZDZD"
 
@@ -26,10 +27,11 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
-	let messaging_events = req.body.entry[0].messaging
+	let data = JSONbig.parse(req.body);
+	let messaging_events = data.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i]
-		let sender = event.sender.id;
+		let sender = event.sender.id.toString();
 		console.log('\n\n SENDER: ', event.sender, '\n\n')
 		if (event.message && event.message.text) {
 			let text = event.message.text;
