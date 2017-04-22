@@ -126,6 +126,7 @@ app.post('/webhook/', function (req, res) {
 			 	text.includes('اخبارك') ||
 			 	text.includes('عامل')
 			){
+				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imGood))
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
 			}
