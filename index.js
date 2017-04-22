@@ -122,9 +122,9 @@ app.post('/webhook/', function (req, res) {
 				text === 'اخبارك ايه' ||
 				text === 'عامل ايه' ||
 				text === 'ايه الدنيا' ||
+			 	text.includes('أخبارك') ||
 			 	text.includes('اخبارك') ||
-			 	text.includes('عامل') ||
-			 	text.includes('أخبرك')
+			 	text.includes('عامل')
 			){
 				sendTextMessage(sender, helpers.getRandomFromArray(dictionary.howAreYou))
 				continue
@@ -159,6 +159,7 @@ function sendTextMessage(sender, text) {
 		if (error) {
 			console.log('Error sending messages: ', error)
 		} else if (response.body.error) {
+			cosnole.log('response.body ==>', response.body)
 			console.log('Error: ', response.body.error)
 		}
 	})

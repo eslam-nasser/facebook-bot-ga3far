@@ -1,3 +1,13 @@
+/*
+    شرفتنا يا افندم
+    https://pbs.twimg.com/media/Cf1gVuWUIAIA_gK.jpg
+
+    تعا
+    https://pbs.twimg.com/media/Cj2aq5zWkAANJeU.jpg
+
+
+
+*/
 module.exports = {
     morning: [
         'صباح العسل :D',
@@ -20,6 +30,11 @@ module.exports = {
         'أخبارك ايه؟ :D',
         'عامل ايه؟',
         'أخبار الدنيا ايه معاك؟'
+    ],
+    imGood: [
+        'انا زي الفل الحمد لله :D',
+        'الحمد لله والله',
+        'الدنيا ماشيه :]'
     ],
     bad_words: [
         // 'يا ابن الوسخة',
