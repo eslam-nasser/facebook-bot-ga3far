@@ -145,8 +145,10 @@ app.post('/webhook/', function (req, res) {
 			if(
 				text === 'typing'
 			){
-				sendTextMessage(sender, 'هكتب رساله ...')
 				typing(sender);
+				setTimeout(() => {
+					sendTextMessage(sender, 'هكتب رساله ...')
+				})
 				continue
 			}
 			// if i don't understand
