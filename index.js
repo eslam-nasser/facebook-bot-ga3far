@@ -223,9 +223,9 @@ function sendGenericMessage(sender) {
 
 
 // Stay up bitch!
-setInterval(function() {
-    request.get('http://pacific-bayou-22883.herokuapp.com/');
-}, 1500); // each 20 min bing him
+// setInterval(function() {
+//     request.get('http://pacific-bayou-22883.herokuapp.com/');
+// }, 1500); // each 20 min bing him
 
 // spin spin sugar
 app.listen(app.get('port'), function() {
