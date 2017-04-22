@@ -21,7 +21,7 @@ module.exports = {
     // Typing
     typing: function(sender){
         // I will delay it just to make it feel real!
-        setTimeout(() => {
+        // setTimeout(() => {
             request({
                 url: 'https://graph.facebook.com/v2.6/me/messages',
                 qs: {access_token:token},
@@ -37,7 +37,7 @@ module.exports = {
                     console.log('Error: ', response.body.error)
                 }
             })
-        }, 500)
+        // }, 500)
     },
     // Send text messages
     sendTextMessage: function(sender, text) {
