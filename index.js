@@ -130,6 +130,13 @@ app.post('/webhook/', function (req, res) {
 				}, 500)
 				continue
 			}
+			// I'm up
+			if(
+			 	text.includes('صاحي')
+			){
+				helpers.sendTextMessage(sender, helpers.getRandomFromArray(dictionary.imUp))
+				continue
+			}
 			// How you doing!
 			if(
 				text === 'أخبارك ايه' ||
