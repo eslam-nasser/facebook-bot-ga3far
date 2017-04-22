@@ -3,22 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-const bad_words = 
-[
-	'يا ابن الوسخة',
-	'يا ابن الجزمة',
-	'يا ابن العرص',
-	'طيب ليه كدا',
-	'هزعلك و أجيب ناس تزعلك',
-	'يا إبن الكلب يا جزمة',
-	'عارفك و هجيبك ياض',
-	'هزعلك',
-	'كسمك',
-	'طيزك حمرا',
-	'حمرا',
-	'يا قليل الإدب',
-	'يا اخي كسمك'
-]
+import * as dictionary from './words_dictionary'
 
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -62,7 +47,11 @@ app.post('/webhook/', function (req, res) {
 				text === 'صوره' ||
 
 				text === 'خلفية' ||
-				text === 'خلفيه'
+				text === 'خلفيه' ||
+
+				text.includes('صورة') ||
+				text.includes('صوره') ||
+				text.includes('خلفي')
 			){
 				messageData = {
 					attachment:{
@@ -83,6 +72,16 @@ app.post('/webhook/', function (req, res) {
 				sendTextMessage(sender, bad_words[Math.floor(Math.random()*bad_words.length)])
 				continue
 			}
+			// morning
+			if(
+				text === 'صباح الفل' ||
+				text === 'صباح الخير' ||
+				text === 'صباح جميل' ||
+			 	text.includes('صباح')
+			){
+				sendTextMessage(sender, 'صباحك عسل :D')
+				continue
+			}
 			// if i don't understand
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
@@ -96,8 +95,6 @@ app.post('/webhook/', function (req, res) {
 })
 
 
-// recommended to inject access tokens as environmental variables, e.g.
-// const token = process.env.FB_PAGE_ACCESS_TOKEN
 const token = "EAABdDLxPwfABAGPihFaggBZCeri5ZC6u3u0k5dZAtKMyQ2uI5UxpxU2M0JDva6jTIvmEsF0VWsfsKNFnQe00VDre1JZA1gznXwpnLOqwCg52VpJbdBpqQBFZBvEotcTQXvu6dCsT13hoZCsqupa1aZC71btNbLy7xCOHUSiCFG7oQZDZD"
 
 function sendTextMessage(sender, text) {
