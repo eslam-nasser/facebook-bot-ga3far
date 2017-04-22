@@ -2,7 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const http = require('http');
+// const http = require('http');
 const app = express();
 const dictionary = require('./words_dictionary')
 const helpers = require('./helpers')
@@ -224,7 +224,7 @@ function sendGenericMessage(sender) {
 
 // Stay up bitch!
 setInterval(function() {
-    http.get('https://pacific-bayou-22883.herokuapp.com/');
+    request.get('http://pacific-bayou-22883.herokuapp.com/');
 }, 1200); // each 20 min bing him
 
 // spin spin sugar
